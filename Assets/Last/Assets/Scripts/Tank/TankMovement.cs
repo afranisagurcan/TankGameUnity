@@ -16,8 +16,13 @@ public class TankMovement : MonoBehaviour
     private Rigidbody m_Rigidbody;         
     private float m_MovementInputValue;    
     private float m_TurnInputValue;        
-    private float m_OriginalPitch;         
+    private float m_OriginalPitch;
 
+    public float forceMovementConstant;
+    public float forceRotationConstant;
+
+    float acceleration = 0.6f;
+    float speed = 0;
 
     private void Awake()
     {
@@ -48,18 +53,6 @@ public class TankMovement : MonoBehaviour
     }
     
 
-    private void Update()
-    {
-
-        m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
-        m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-        
-        
-        EngineAudio ();
-        
-
-    }
-
 
     private void EngineAudio()
     {
@@ -88,33 +81,63 @@ public class TankMovement : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
+        // Store the player's input and make sure the audio for the engine is playing.
+        
+        m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
+        m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+        m_Rigidbody.AddRelativeForce(0, 0, 1f, ForceMode.Acceleration);
+
+        EngineAudio ();
+        
         // Move and turn the tank.
         Move();
         Turn();
     }
 
+    /*
+    float acceleration = 0.6;
+float maxSpeed = 30;
+float speed = 0;
+
+void Update(){
+   if(speed < maxSpeed){
+      speed += acceleration * Time.deltaTime;
+    }
+
+   transform.position.x = transform.position.x + speed*Time.deltaTime;
+
+}
+    */
 
     private void Move()
     {
         Vector3 movement = new Vector3();
+       
         if (Input.GetAxis((m_MovementAxisName)) > 0)
         {
-            movement = transform.forward * m_MovementInputValue * m_Speed  ;
+            
+            movement = transform.forward * m_MovementInputValue * m_Speed ;
         }
         else if (Input.GetAxis((m_MovementAxisName)) <= 0)
         {
-            movement = transform.forward * m_MovementInputValue * (m_Speed / 3) ;
+            
+            movement = transform.forward * m_MovementInputValue * (m_Speed / 5) * 2 ;
         }
+       
 
         if (Input.GetButton (m_MovementAxisName))
         {
-            m_Rigidbody.AddForce(movement * 5, ForceMode.Force);
+            m_Rigidbody.AddForce(movement * forceMovementConstant, ForceMode.Acceleration);
         }
 
+        
+
         // m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+        
     }
+
 
     private void Turn()
     { 
@@ -128,9 +151,8 @@ public class TankMovement : MonoBehaviour
         {     
             turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime * (-1) ;
         }
-      
-        Quaternion turnRotation = Quaternion.Euler(0f,turn,0f);
+        
+        Quaternion turnRotation = Quaternion.Euler(0f,turn * forceRotationConstant,0f);
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
     }
-
 }

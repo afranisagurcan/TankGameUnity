@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
+  - component: {fileID: 834896615983399195}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.056692794, y: 0, z: 0, w: 0.99839175}
-  m_LocalPosition: {x: 0.01, y: 3.75, z: -11.59}
+  m_LocalPosition: {x: 0.01, y: 3.81, z: -11.58}
   m_LocalScale: {x: 0.025, y: 0.025000012, z: 0.025000012}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -75,6 +76,38 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &834896615983399195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ae0469747623d42858dd43894c01b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 191735111291133430}
+  targetHeight: 1.7
+  distance: 12
+  offsetFromWall: 0.1
+  maxDistance: 20
+  minDistance: 0.6
+  xSpeed: 200
+  ySpeed: 200
+  yMinLimit: -20
+  yMaxLimit: 20
+  zoomRate: 40
+  rotationDampening: 3
+  zoomDampening: 5
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lockToRearOfTarget: 0
+  allowMouseInputX: 1
+  allowMouseInputY: 1
+  sensitivity: 0.5
 --- !u!1 &191735111291133430
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,9 +127,10 @@ GameObject:
   - component: {fileID: 201796467454084201}
   - component: {fileID: 201796467454084202}
   - component: {fileID: 3820735889601024688}
+  - component: {fileID: 8759540840442882495}
   m_Layer: 6
   m_Name: Tank2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,9 +163,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191735111291133430}
   serializedVersion: 2
-  m_Mass: 46.27
-  m_Drag: 3
-  m_AngularDrag: 3
+  m_Mass: 27000
+  m_Drag: 10
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -355,12 +389,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerNumber: 1
-  m_Speed: 12000
-  m_TurnSpeed: 50
+  m_Speed: 60
+  m_TurnSpeed: 10
   m_MovementAudio: {fileID: 191735111291230957}
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PitchRange: 0.2
+  forceMovementConstant: 3
+  forceRotationConstant: 3
 --- !u!114 &191735111810352938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,8 +434,8 @@ MonoBehaviour:
   m_ShootingAudio: {fileID: 191735111291230954}
   m_ChargingClip: {fileID: 8300000, guid: c17f124fcdc0f5446a72f793898bd74b, type: 3}
   m_FireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
-  m_MinLaunchForce: 15
-  m_MaxLaunchForce: 30
+  m_MinLaunchForce: 40
+  m_MaxLaunchForce: 80
   m_MaxChargeTime: 0.75
 --- !u!33 &201796467454084201
 MeshFilter:
@@ -481,6 +517,14 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!81 &8759540840442882495
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191735111291133430}
+  m_Enabled: 1
 --- !u!1 &191735111291133434
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +593,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -607,7 +651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &201796466001190692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -751,7 +795,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -912,7 +956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &201796466533609282
 RectTransform:
   m_ObjectHideFlags: 0
@@ -999,6 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UseRelativeRotation: 1
+  HealthSlider: {fileID: 0}
 --- !u!1 &201796466793022174
 GameObject:
   m_ObjectHideFlags: 0
