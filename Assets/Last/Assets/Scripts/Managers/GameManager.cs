@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void SpawnAllTanks()
+   private void SpawnAllTanks()
     {
         // For all the tanks...
         for (int i = 0; i < m_Tanks.Length; i++)

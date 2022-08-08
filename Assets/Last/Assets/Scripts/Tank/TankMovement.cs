@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Photon.Pun;
 
-public class TankMovement : MonoBehaviour
+public class TankMovement : MonoBehaviourPunCallbacks
 {
     public int m_PlayerNumber = 1;         
     public float m_Speed = 12f;            
@@ -84,16 +85,19 @@ public class TankMovement : MonoBehaviour
     private void Update()
     {
         // Store the player's input and make sure the audio for the engine is playing.
-        
-        m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
-        m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-        m_Rigidbody.AddRelativeForce(0, 0, 1f, ForceMode.Acceleration);
+        if (photonView.IsMine){
 
-        EngineAudio ();
-        
-        // Move and turn the tank.
-        Move();
-        Turn();
+       
+            m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
+            m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
+            m_Rigidbody.AddRelativeForce(0, 0, 1f, ForceMode.Acceleration);
+
+            EngineAudio ();
+            
+            // Move and turn the tank.
+            Move();
+            Turn(); 
+        }
     }
 
     /*
