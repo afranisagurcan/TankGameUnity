@@ -728,9 +728,9 @@ MonoBehaviour:
   m_CameraControl: {fileID: 1673085925}
   m_MessageText: {fileID: 1571177283}
   m_scoreBoardText: {fileID: 474930775}
-  m_TankPrefab: {fileID: 191735111291133430, guid: 15999ad7a426f924f80e1911c6665c52, type: 3}
+  m_TankPrefab: {fileID: 7472530057856945015, guid: 15999ad7a426f924f80e1911c6665c52, type: 3}
   m_Tanks:
-  - m_PlayerColor: {r: 0.07831969, g: 0.17366442, b: 0.3018868, a: 0}
+  - m_PlayerColor: {r: 0, g: 0, b: 0, a: 0}
     m_SpawnPoint: {fileID: 1464456363}
     m_PlayerNumber: 0
     m_ColoredPlayerText: 
@@ -1808,8 +1808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c54e3c1f18f8cbb49b10f5e2dc8a1865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Targets:
-  - {fileID: 0}
+  m_Targets: {fileID: 0}
 --- !u!1 &1732296779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,10 +2550,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2100915406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a62940bdcc44cc8458bc5d9c59934ff4, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cf82293231cfe74c8100b2c5fa89eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7472530057856945015, guid: 15999ad7a426f924f80e1911c6665c52, type: 3}
+  gameMan: {fileID: 770408663}
+  m_TankPrefab: {fileID: 191735111291133430, guid: 15999ad7a426f924f80e1911c6665c52, type: 3}
+  m_CameraControl: {fileID: 1673085925}
+  i: 0
 --- !u!4 &2100915408
 Transform:
   m_ObjectHideFlags: 0

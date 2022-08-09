@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Photon.Pun;
+﻿using Photon.Pun;
+using UnityEngine;
 
 public class TankMovement : MonoBehaviourPunCallbacks
 {
@@ -21,10 +21,6 @@ public class TankMovement : MonoBehaviourPunCallbacks
 
     public float forceMovementConstant;
     public float forceRotationConstant;
-
-    float acceleration = 0.6f;
-    float speed = 0;
-
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -85,61 +81,49 @@ public class TankMovement : MonoBehaviourPunCallbacks
     private void Update()
     {
         // Store the player's input and make sure the audio for the engine is playing.
-        if (photonView.IsMine){
-
-       
+        if (photonView.IsMine)
+        {
             m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
             m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-            m_Rigidbody.AddRelativeForce(0, 0, 1f, ForceMode.Acceleration);
+            //m_Rigidbody.AddRelativeForce(0, 0, 1f, ForceMode.Acceleration);
 
             EngineAudio ();
             
             // Move and turn the tank.
             Move();
-            Turn(); 
+            Turn();
         }
     }
-
-    /*
-    float acceleration = 0.6;
-float maxSpeed = 30;
-float speed = 0;
-
-void Update(){
-   if(speed < maxSpeed){
-      speed += acceleration * Time.deltaTime;
-    }
-
-   transform.position.x = transform.position.x + speed*Time.deltaTime;
-
-}
-    */
-
+    
     private void Move()
     {
+        
+        Time.fixedDeltaTime = 0.005f;
         Vector3 movement = new Vector3();
-       
         if (Input.GetAxis((m_MovementAxisName)) > 0)
         {
-            
             movement = transform.forward * m_MovementInputValue * m_Speed ;
         }
         else if (Input.GetAxis((m_MovementAxisName)) <= 0)
         {
-            
             movement = transform.forward * m_MovementInputValue * (m_Speed / 5) * 2 ;
         }
+        
+        /*float Distance = Vector3.Distance(transform.position, movement);
+        Vector3 pos = transform.position;
+        
        
-
+        transform.position = Vector3.MoveTowards(pos, pos+movement, (0.3f * Distance) * Time.deltaTime);
+        */
+        //transform.position = Vector3.Lerp(transform.position, movement, 0.3f);
+        
+        //m_Rigidbody.MovePosition(m_Rigidbody.position + movement );
+       
         if (Input.GetButton (m_MovementAxisName))
         {
+            //m_Rigidbody.MovePosition(m_Rigidbody.position + movement );
             m_Rigidbody.AddForce(movement * forceMovementConstant, ForceMode.Acceleration);
         }
-
-        
-
-        // m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
-        
     }
 
 
@@ -147,12 +131,16 @@ void Update(){
     { 
         // Adjust the rotation of the tank based on the player's input.
         float turn = 0;
-        if (m_MovementInputValue >= 0)
+        if (m_MovementInputValue > 0)
         {
             turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime ;
         }
-        else
+        else if (m_MovementInputValue == 0)
         {     
+            turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime ;
+        }
+        else
+        {
             turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime * (-1) ;
         }
         

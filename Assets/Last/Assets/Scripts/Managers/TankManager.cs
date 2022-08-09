@@ -45,10 +45,10 @@ public class TankManager
             // ... set their material color to the color specific to this tank.
             renderers[i].material.color = m_PlayerColor;
         }
+        
     }
 
 
-    // Used during the phases of the game where the player shouldn't be able to control their tank.
     public void DisableControl ()
     {
         m_Movement.enabled = false;
@@ -57,8 +57,6 @@ public class TankManager
         m_CanvasGameObject.SetActive (false);
     }
 
-
-    // Used during the phases of the game where the player should be able to control their tank.
     public void EnableControl ()
     {
         m_Movement.enabled = true;
@@ -67,8 +65,6 @@ public class TankManager
         m_CanvasGameObject.SetActive (true);
     }
 
-
-    // Used at the start of each round to put the tank into it's default state.
     public void Reset ()
     {
         m_Instance.transform.position = m_SpawnPoint.position;

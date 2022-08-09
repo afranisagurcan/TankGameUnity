@@ -8,7 +8,6 @@ using UnityEngine;
     using System.Collections;
      
     public class TankCamera2 : MonoBehaviour {  
-        
         public GameObject target;                  // Target to follow
         public float targetHeight = 1.7f;          // Vertical offset adjustment
         public float distance = 12.0f;             // Default Distance
@@ -56,15 +55,18 @@ using UnityEngine;
             if (GetComponent<Rigidbody>())
                 GetComponent<Rigidbody>().freezeRotation = true;
                
-            if (lockToRearOfTarget)
+            if (lockToRearOfTarget){
+                Debug.Log("LOCKED!");
                 rotateBehind = true;
+            }
+                
          }
         void Update(){
             
             //transform.rotation = Quaternion.Euler(20 , transform.rotation.y , transform.rotation.z);
             
             if (transform.parent == null){
-                target = GameObject.FindGameObjectWithTag("Player") as GameObject;
+                target = GameObject.FindGameObjectWithTag("Player") as GameObject ;
                 Debug.Log("Looking for Player");
             }
      
@@ -136,7 +138,9 @@ using UnityEngine;
      
             // If there was a collision, correct the camera position and calculate the corrected distance
             var isCorrected = false;
-        
+            
+            
+            
             
             if (Physics.Linecast (trueTargetPosition, position, out collisionHit, collisionLayers))
             {
