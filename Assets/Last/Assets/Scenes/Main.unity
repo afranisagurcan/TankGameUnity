@@ -730,7 +730,7 @@ MonoBehaviour:
   m_scoreBoardText: {fileID: 474930775}
   m_TankPrefab: {fileID: 7472530057856945015, guid: 15999ad7a426f924f80e1911c6665c52, type: 3}
   m_Tanks:
-  - m_PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+    m_PlayerColor: {r: 0, g: 0, b: 0, a: 0}
     m_SpawnPoint: {fileID: 1464456363}
     m_PlayerNumber: 0
     m_ColoredPlayerText: 

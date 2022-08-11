@@ -33,10 +33,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined a room.");
-        gameMan.m_Tanks[i].m_Instance = PhotonNetwork.Instantiate(playerPrefab.name,gameMan.m_Tanks[i].m_SpawnPoint.position, gameMan.m_Tanks[i].m_SpawnPoint.rotation);
-        gameMan.m_Tanks[i].m_PlayerNumber = i + 1;
-        gameMan.m_Tanks[i].Setup();
-        gameMan.SetCameraTargets(gameMan.m_Tanks[i]);
+        gameMan.m_Tanks.m_Instance = PhotonNetwork.Instantiate(playerPrefab.name,gameMan.m_Tanks.m_SpawnPoint.position, gameMan.m_Tanks.m_SpawnPoint.rotation);
+        gameMan.m_Tanks.m_PlayerNumber = i + 1;
+        gameMan.m_Tanks.Setup();
+        gameMan.SetCameraTargets(gameMan.m_Tanks);
         i++;
     }
     

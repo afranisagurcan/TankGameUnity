@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
     public Text m_scoreBoardText ;                 
     public PhotonView m_TankPrefab;             // Reference to the prefab the players will control.
-    public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+    public TankManager m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
 
     private int m_RoundNumber;                  // Which round the game is currently on.
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
         // Snap the camera's zoom and position to something appropriate for the reset tanks.
        
-        m_scoreBoardText.text = "Player 1 : " + m_Tanks[0].m_Wins;
+        m_scoreBoardText.text = "Player 1 : " + m_Tanks.m_Wins;
         // Increment the round number and display text showing the players what round it is.
         m_RoundNumber++;
         m_MessageText.text = "ROUND " + m_RoundNumber;
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         // As soon as the round begins playing let the players control the tanks.
         //EnableTankControl ();
 
-        m_scoreBoardText.text = "Player 1 : " + m_Tanks[0].m_Wins;
+        m_scoreBoardText.text = "Player 1 : " + m_Tanks.m_Wins;
         // Clear the text from the screen.
         m_MessageText.text = string.Empty;
 
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
         // Clear the winner from the previous round.
         m_RoundWinner = null;
 
-        m_scoreBoardText.text = "Player 1 : " + m_Tanks[0].m_Wins;
+        m_scoreBoardText.text = "Player 1 : " + m_Tanks.m_Wins;
         // See if there is a winner now the round is over.
        /* m_RoundWinner = GetRoundWinner ();
 
@@ -130,16 +130,15 @@ public class GameManager : MonoBehaviour
         m_GameWinner = GetGameWinner ();
         */
         // Get a message based on the scores and whether or not there is a game winner and display it.
-        string message = EndMessage ();
-        m_MessageText.text = message ;
-
+        //string message = EndMessage ();
+        //m_MessageText.text = message ;
         // Wait for the specified length of time until yielding control back to the game loop.
         yield return m_EndWait;
     }
 
 
     // This is used to check if there is one or fewer tanks remaining and thus the round should end.
-    private bool OneTankLeft()
+    /*private bool OneTankLeft()
     {
         // Start the count of tanks left at zero.
         int numTanksLeft = 0;
@@ -242,5 +241,5 @@ public class GameManager : MonoBehaviour
         {
             m_Tanks[i].DisableControl();
         }
-    }
+    }*/
 }
