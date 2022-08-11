@@ -33,9 +33,10 @@ using UnityEngine;
         private float correctedDistance;
         private bool rotateBehind = false;
         private bool mouseSideButton = false;   
-        private float pbuffer = 0.0f;              //Cooldownpuffer for SideButtons
-        private float coolDown = 0.5f;             //Cooldowntime for SideButtons 
-             
+        private float pbuffer = 0.0f;              
+        private float coolDown = 0.5f;            
+
+
         public float Sensitivity {
             get { return sensitivity; }
             set { sensitivity = value; }
@@ -59,6 +60,7 @@ using UnityEngine;
                 Debug.Log("LOCKED!");
                 rotateBehind = true;
             }
+            target = GameObject.FindGameObjectWithTag("Player") as GameObject ;
                 
          }
         void Update(){
