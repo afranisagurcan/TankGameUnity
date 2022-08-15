@@ -4,10 +4,6 @@ using UnityEngine;
 [Serializable]
 public class TankManager
 {
-    // This class is to manage various settings on a tank.
-    // It works with the GameManager class to control how the tanks behave
-    // and whether or not players have control of their tank in the 
-    // different phases of the game.
 
     public Color m_PlayerColor;                             // This is the color this tank will be tinted.
     public Transform m_SpawnPoint;                          // The position and direction the tank will have when it spawns.
@@ -24,6 +20,8 @@ public class TankManager
 
     public void Setup ()
     {
+        //Debug.Log("UPSET");
+        
         // Get references to the components.
         m_Movement = m_Instance.GetComponent<TankMovement> ();
         m_Shooting = m_Instance.GetComponent<TankShooting> ();
@@ -67,9 +65,12 @@ public class TankManager
 
     public void Reset ()
     {
+        Debug.Log(m_Instance.transform.position);
         m_Instance.transform.position = m_SpawnPoint.position;
+        Debug.Log(m_Instance.transform.position); 
         m_Instance.transform.rotation = m_SpawnPoint.rotation;
 
+        
         m_Instance.SetActive (false);
         m_Instance.SetActive (true);
     }

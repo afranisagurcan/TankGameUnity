@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         //ResetAllTanks ();
         //DisableTankControl ();
 
-        // Snap the camera's zoom and position to something appropriate for the reset tanks.
+        //Snap the camera's zoom and position to something appropriate for the reset tanks.
        
         m_scoreBoardText.text = "Player 1 : " + m_Tanks.m_Wins;
         // Increment the round number and display text showing the players what round it is.
@@ -215,31 +215,29 @@ public class GameManager : MonoBehaviour
         return message;
     }
 
-
+*/
+/*
     // This function is used to turn all the tanks back on and reset their positions and properties.
     private void ResetAllTanks()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            m_Tanks[i].Reset();
-        }
+        
+        m_Tanks.Reset();
+        
     }
 
 
     private void EnableTankControl()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            m_Tanks[i].EnableControl();
-        }
+        
+        m_Tanks.EnableControl();
+        
     }
 
 
     private void DisableTankControl()
     {
-        for (int i = 0; i < m_Tanks.Length; i++)
-        {
-            m_Tanks[i].DisableControl();
-        }
+        
+        m_Tanks.DisableControl();
+        
     }*/
 }
